@@ -1,0 +1,97 @@
+{% load static %}
+<style>
+  .box{
+         display: flex;
+         justify-content: center;
+         align-items: baseline;
+         height:100vh; 
+         margin-top: 75px;
+     }
+     .subbox{
+         width:600px;
+         padding: 20px;
+         border-radius: 20px;
+         background-color:#f8f9fa;
+     }
+ </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bankapp/css/bootstrap.css' %}">        
+
+</head>
+<body style="text-align: center;">
+    <div class="nvbar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">TSF BANK</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">HOME</a>
+                      </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'customers' %}">CUSTOMERS</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'addcustomer' %}">ADD CUSTOMER</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'history' %}">HISTORY</a>
+                  </li>                  
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+    <div class="box">
+       <div class="subbox">
+         
+       <div style="padding-bottom: 15px;"> <h3><b>TRANSFER MONEY</b></h3></div>
+           <form action="" method="post">{% csrf_token %}
+   
+   
+               <label for="email" ><h5><b>Sender Details</b></h5></label>
+               <select name="semail" id="sender" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                 <option selected value="select">SELECT SENDER</option>
+               {% for i in customerdetails %}
+               <option value="{{i.email}}">{{i.accno}}--{{i.name}}  :  {{i.email}}  [Acc Bal:{{i.amount}} ]</option>
+               {% endfor %}
+           </select><br><br>
+   
+          <div class="form-outline">
+            <label class="form-label" for="typeNumber"><h5><b>ENTER THE AMOUNT </b></h5></label>
+           <input type="number" class="form-control" name="samt" id="samt" value="null" required>
+          </div>
+           <br><br>
+
+           
+    
+   
+           <label for="remail"><h5><b> Reciever's Details</b></h5></label>
+           <select class="form-select form-select-lg mb-3" name="remail" id="Reciever" aria-label=".form-select-lg example">
+             <option selected value="select">SELECT RECIEVER</option>
+             {% for i in customerdetails %}
+               <option value="{{i.email}}">{{i.accno}}--{{i.name}}  :  {{i.email}}  [Acc Bal:{{i.amount}} ]</option>
+               {% endfor %}
+           </select><br><br>
+   
+   
+          
+           <button class="btn btn-primary" type="submit" id="btn">Transfer</button>   
+           </form>     
+      
+        
+
+      </div>
+    </div>
+   
+</body>
+</html>

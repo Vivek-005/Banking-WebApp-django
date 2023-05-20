@@ -1,0 +1,80 @@
+<style>
+ .box{
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        height:100vh; 
+        margin-top: 75px;
+    }
+    .subbox{
+        width:600px;
+        padding: 20px;
+        border-radius: 20px;
+        background-color:#f8f9fa;
+    }
+</style>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'bankapp/css/bootstrap.css' %}">        
+    <title>Customer Details</title>
+</head>
+<body style="text-align: center;">
+    <div class="nvbar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">TSF BANK</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">HOME</a>
+                      </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'transactions' %}">TRANSACTION</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'history' %}">HISTORY</a>
+                  </li>                  
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+   
+    <div class="box">
+        <div class="subbox">
+          <div>
+              <h3 style="float:left;padding-left: 08px;"><b>CUSTOMER DETAILS</b></h3>
+              <button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='{% url 'addcustomer' %}'">ADD CUSTOMER</button>      
+          </div>
+        <table class="table">
+     <thead>
+      <tr>
+        <th scope="col">Account No.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email Address</th>
+        <th scope="col">Balance</th>
+      </tr>
+     </thead>
+     <tbody>
+      {% for detail in details%}
+      <tr>
+        <td scope="row">{{ detail.accno }}</td>
+        <td scope="row">{{ detail.name }}</td>
+        <td scope="row">{{ detail.email }}</td>
+        <td scope="row">{{ detail.amount }}/-</td>
+      </tr>
+      {% endfor %}
+     </tbody>
+    </table>
+    </div>
+</div>
+</body>
+</html>
